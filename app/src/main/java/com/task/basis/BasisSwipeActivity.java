@@ -2,6 +2,8 @@ package com.task.basis;
 
 import android.os.Bundle;
 
+import com.task.basis.core.CoreSwipeActivity;
+
 public class BasisSwipeActivity extends CoreSwipeActivity {
 
     @Override

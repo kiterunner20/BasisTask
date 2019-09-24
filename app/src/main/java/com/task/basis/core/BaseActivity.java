@@ -1,16 +1,16 @@
-package com.task.basis;
+package com.task.basis.core;
 
 import android.os.Bundle;
 
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.evernote.android.state.StateSaver;
+import com.task.basis.R;
+
 import butterknife.ButterKnife;
-import icepick.Icepick;
 
-
-public abstract class CoreSwipeActivity extends AppCompatActivity {
-
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +18,14 @@ public abstract class CoreSwipeActivity extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             initIntentExtras(getIntent().getExtras());
         }
-        Icepick.restoreInstanceState(this, savedInstanceState);
+        StateSaver.restoreInstanceState(this, savedInstanceState);
         initDependencies();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Icepick.saveInstanceState(this, outState);
+        StateSaver.saveInstanceState(this, outState);
     }
 
     @Override
@@ -36,7 +36,7 @@ public abstract class CoreSwipeActivity extends AppCompatActivity {
 
     @Override
     public void setContentView(@LayoutRes int resLayout) {
-        super.setContentView(resLayout);
+        super.setContentView(R.layout.activity_core_swipe);
         setUpViews();
     }
 
@@ -61,4 +61,5 @@ public abstract class CoreSwipeActivity extends AppCompatActivity {
     //Destroying the presenter
 
     protected abstract void destroyPresenter();
+
 }

@@ -4,11 +4,14 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.task.basis"
-        minSdkVersion 15
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    packagingOptions{
+        exclude 'META-INF/rxjava.properties'
     }
     buildTypes {
         release {
@@ -25,11 +28,15 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
     //VIEWS
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
     //MAINTAINING STATE
-    annotationProcessor 'frankiesardo:icepick-processor:3.2.0'
-    implementation 'frankiesardo:icepick-processor:3.2.0'
-    api 'frankiesardo:icepick:3.2.0'
+    implementation 'com.evernote:android-state:1.4.1'
+    annotationProcessor 'com.evernote:android-state-processor:1.4.1'
+
+    //NETWORK
+    implementation 'io.reactivex:rxjava:1.3.8'
+    compile 'io.reactivex:rxandroid:1.2.1'
 }
