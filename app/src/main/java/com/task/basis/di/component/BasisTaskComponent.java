@@ -1,6 +1,7 @@
 package com.task.basis.di.component;
 
 import com.task.basis.di.module.BasisTaskModule;
+import com.task.basis.ui.BasisSwipeActivity;
 
 import javax.inject.Singleton;
 
@@ -11,5 +12,5 @@ import dagger.Component;
 
 public interface BasisTaskComponent {
 
-
+    void inject(BasisSwipeActivity basisSwipeActivity);
 }

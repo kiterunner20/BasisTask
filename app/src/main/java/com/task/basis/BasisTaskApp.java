@@ -2,6 +2,7 @@ package com.task.basis;
 
 import android.app.Application;
 
+import com.task.basis.di.component.DaggerBasisTaskComponent;
 import com.task.basis.di.module.BasisTaskModule;
 import com.task.basis.di.component.BasisTaskComponent;
 

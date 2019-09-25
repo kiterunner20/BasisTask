@@ -1,5 +1,6 @@
 package com.task.basis.core;
 
+import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 public class BasePresenter<V extends BaseView> {
@@ -20,6 +21,13 @@ public class BasePresenter<V extends BaseView> {
 
     protected boolean isViewAttached() {
         return this.view != null;
+    }
+
+    protected final void addToSubscription(Subscription subscription) {
+        if (null == subscriptions) {
+            subscriptions = new CompositeSubscription();
+        }
+        subscriptions.add(subscription);
     }
 
     protected void showProgress() {

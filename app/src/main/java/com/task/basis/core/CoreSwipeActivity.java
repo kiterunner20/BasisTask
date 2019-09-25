@@ -43,7 +43,7 @@ public abstract class CoreSwipeActivity extends BaseActivity implements BaseView
     }
 
     @Override
-    public void showEmpty(String error) {
-
+    public void showEmpty(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 }
