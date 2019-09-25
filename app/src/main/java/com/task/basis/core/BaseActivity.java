@@ -49,7 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initIntentExtras(Bundle extras);
 
-    //Dependency injection
+    //Dependency injection is done in this method
     protected abstract void initDependencies();
 
     //Called after onCreate for intiallizing all the views
