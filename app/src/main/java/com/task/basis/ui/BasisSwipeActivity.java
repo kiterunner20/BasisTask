@@ -5,7 +5,9 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +19,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.task.basis.BasisTaskApp;
 import com.task.basis.R;
 import com.task.basis.core.BaseActivity;
-import com.task.basis.data.TaskData;
 import com.task.basis.data.TaskDataList;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackListener;
@@ -31,7 +32,6 @@ import com.yuyakaido.android.cardstackview.SwipeableMethod;
 
 import java.util.ArrayList;
 
-import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -50,6 +50,8 @@ public class BasisSwipeActivity extends BaseActivity implements BasisSwipeView, 
   @BindView(R.id.rewind_button) FloatingActionButton rewindButton;
   @BindView(R.id.progress_count) ProgressBar progressCount;
   @BindView(R.id.tv_error) TextView tvError;
+  @BindView(R.id.rl_error) RelativeLayout rlError;
+  @BindView(R.id.fr_cardview) FrameLayout frCardView;
 
   CardStackLayoutManager manager;
   BasisCardSwipeAdapter adapter;
@@ -184,22 +186,30 @@ public class BasisSwipeActivity extends BaseActivity implements BasisSwipeView, 
 
   @Override public void showProgress() {
     progressBar.setVisibility(View.VISIBLE);
-    tvError.setVisibility(View.GONE);
+    rlError.setVisibility(View.GONE);
+    frCardView.setVisibility(View.GONE);
   }
 
   @Override public void showError(String error) {
     progressBar.setVisibility(View.GONE);
     tvError.setText(error);
-    tvError.setVisibility(View.VISIBLE);
+    rlError.setVisibility(View.VISIBLE);
+    frCardView.setVisibility(View.GONE);
   }
 
   @Override public void showContent() {
     progressBar.setVisibility(View.GONE);
-    tvError.setVisibility(View.GONE);
+    rlError.setVisibility(View.GONE);
+    frCardView.setVisibility(View.VISIBLE);
   }
 
   @Override public void showEmpty(String message) {
-    tvError.setVisibility(View.VISIBLE);
     tvError.setText(message);
+    rlError.setVisibility(View.VISIBLE);
+    frCardView.setVisibility(View.GONE);
+  }
+
+  @OnClick(R.id.refresh) void refreshClicked() {
+    presenter.getJsonData();
   }
 }

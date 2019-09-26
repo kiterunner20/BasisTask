@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BasisTask</string>
+  <string name="reload">Reload</string>
 </resources>

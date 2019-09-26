@@ -4,14 +4,12 @@ import com.task.basis.BasisTaskService;
 import com.task.basis.data.TaskData;
 import com.task.basis.data.TaskDataList;
 import com.task.basis.model.Datum;
-import com.task.basis.model.TaskModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.functions.Func1;
 
 public class BasisApi {
 
