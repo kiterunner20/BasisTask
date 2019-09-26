@@ -21,7 +21,7 @@ public class CustomConverterFactory extends Converter.Factory {
 
     private final Gson gson;
 
-    public CustomConverterFactory(Gson gson) {
+    private CustomConverterFactory(Gson gson) {
         this.gson = gson;
     }
 

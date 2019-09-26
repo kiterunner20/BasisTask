@@ -8,22 +8,16 @@ import java.util.List;
 
 public class BasisCardSwipeAdapter extends RecyclerAdapter {
 
-    private DataListManager<Datum> dataListManager;
+  private DataListManager<Datum> dataListManager;
 
-    public BasisCardSwipeAdapter() {
+  public BasisCardSwipeAdapter() {
 
-        dataListManager = new DataListManager<>(this);
+    dataListManager = new DataListManager<>(this);
 
-        addDataManager(dataListManager);
-    }
+    addDataManager(dataListManager);
+  }
 
-
-    public void setData(List<Datum> basisTaskList) {
-        dataListManager.addAll(basisTaskList);
-    }
-
-
-    public DataListManager<Datum> getDataListManager() {
-        return dataListManager;
-    }
+  public void setData(List<Datum> basisTaskList) {
+    dataListManager.addAll(basisTaskList);
+  }
 }
