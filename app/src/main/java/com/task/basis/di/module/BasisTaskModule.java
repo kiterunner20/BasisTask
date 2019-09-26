@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.task.basis.BasisTaskService;
 import com.task.basis.BuildConfig;
+import com.task.basis.core.CustomConverterFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,7 +17,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class BasisTaskModule {
@@ -34,7 +34,7 @@ public class BasisTaskModule {
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://gist.githubusercontent.com/anishbajpai014/d482191cb4fff429333c5ec64b38c197/raw/b11f56c3177a9ddc6649288c80a004e7df41e3b9/")
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .addConverterFactory(CustomConverterFactory.create(new Gson()))
                 .build();
         return retrofit.create(BasisTaskService.class);
     }

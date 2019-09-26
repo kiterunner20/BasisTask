@@ -6,7 +6,6 @@ import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.evernote.android.state.StateSaver;
-import com.task.basis.R;
 
 import butterknife.ButterKnife;
 
@@ -23,6 +22,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
+    public void setContentView(@LayoutRes int layoutResId) {
+        super.setContentView(layoutResId);
+        setUpViews();
+
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         StateSaver.saveInstanceState(this, outState);
@@ -32,12 +38,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onDestroy() {
         destroyPresenter();
         super.onDestroy();
-    }
-
-    @Override
-    public void setContentView(@LayoutRes int resLayout) {
-        super.setContentView(R.layout.activity_core_swipe);
-        setUpViews();
     }
 
 
