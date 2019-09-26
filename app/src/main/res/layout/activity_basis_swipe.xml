@@ -111,8 +111,12 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
+      android:fontFamily="@font/poppinsbold"
+      android:gravity="center_horizontal"
+      android:textColor="#ffffff"
       android:textSize="@dimen/font_medium"
       android:visibility="gone"
+      tools:text="Error"
       />
 
 

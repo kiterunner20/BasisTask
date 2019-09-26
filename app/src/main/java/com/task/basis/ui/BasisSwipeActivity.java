@@ -17,8 +17,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.task.basis.BasisTaskApp;
 import com.task.basis.R;
 import com.task.basis.core.BaseActivity;
-import com.task.basis.model.Datum;
-import com.task.basis.model.TaskModel;
+import com.task.basis.data.TaskData;
+import com.task.basis.data.TaskDataList;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackListener;
 import com.yuyakaido.android.cardstackview.CardStackView;
@@ -31,6 +31,7 @@ import com.yuyakaido.android.cardstackview.SwipeableMethod;
 
 import java.util.ArrayList;
 
+import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -41,7 +42,7 @@ public class BasisSwipeActivity extends BaseActivity implements BasisSwipeView, 
   //Dependency injection
   @Inject BasisSwipePresenter presenter;
   //Maintaining the state
-  @State ArrayList<Datum> basisTaskList = new ArrayList<>();
+  @State ArrayList<TaskDataList> basisTaskList = new ArrayList<>();
 
   //Binding the views to ignore findById every time
   @BindView(R.id.progressbar) ProgressBar progressBar;
@@ -72,12 +73,10 @@ public class BasisSwipeActivity extends BaseActivity implements BasisSwipeView, 
   }
 
   @Override protected void onReady() {
-    if (basisTaskList == null) {
+    if (basisTaskList == null || basisTaskList.size() == 0) {
       presenter.getJsonData();
-    }else{
-      if(basisTaskList.size() < 1){
-        presenter.getJsonData();
-      }
+    } else {
+      setJsonData(basisTaskList);
     }
   }
 
@@ -88,9 +87,9 @@ public class BasisSwipeActivity extends BaseActivity implements BasisSwipeView, 
 
   /* If api call is a success using CardStackView which extends recyclerview will take care of
    the swiping part. Then its set to the adapter via this cardStackLayoutManager*/
-  @Override public void setJsonData(TaskModel taskModel) {
+  @Override public void setJsonData(ArrayList<TaskDataList> taskModel) {
     if (taskModel != null) {
-      this.basisTaskList = (ArrayList<Datum>) taskModel.getData();
+      this.basisTaskList = taskModel;
       setUpCardStackView();
       progressCount.setMax(basisTaskList.size());
 
@@ -185,18 +184,22 @@ public class BasisSwipeActivity extends BaseActivity implements BasisSwipeView, 
 
   @Override public void showProgress() {
     progressBar.setVisibility(View.VISIBLE);
+    tvError.setVisibility(View.GONE);
   }
 
   @Override public void showError(String error) {
     progressBar.setVisibility(View.GONE);
     tvError.setText(error);
+    tvError.setVisibility(View.VISIBLE);
   }
 
   @Override public void showContent() {
     progressBar.setVisibility(View.GONE);
+    tvError.setVisibility(View.GONE);
   }
 
   @Override public void showEmpty(String message) {
+    tvError.setVisibility(View.VISIBLE);
     tvError.setText(message);
   }
 }

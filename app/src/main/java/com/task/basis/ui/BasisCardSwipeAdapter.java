@@ -2,13 +2,13 @@ package com.task.basis.ui;
 
 import com.ahamed.multiviewadapter.DataListManager;
 import com.ahamed.multiviewadapter.RecyclerAdapter;
-import com.task.basis.model.Datum;
+import com.task.basis.data.TaskDataList;
 
 import java.util.List;
 
 public class BasisCardSwipeAdapter extends RecyclerAdapter {
 
-  private DataListManager<Datum> dataListManager;
+  private DataListManager<TaskDataList> dataListManager;
 
   public BasisCardSwipeAdapter() {
 
@@ -17,7 +17,7 @@ public class BasisCardSwipeAdapter extends RecyclerAdapter {
     addDataManager(dataListManager);
   }
 
-  public void setData(List<Datum> basisTaskList) {
+  public void setData(List<TaskDataList> basisTaskList) {
     dataListManager.addAll(basisTaskList);
   }
 }

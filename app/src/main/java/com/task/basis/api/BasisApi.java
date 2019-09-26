@@ -1,15 +1,22 @@
 package com.task.basis.api;
 
 import com.task.basis.BasisTaskService;
+import com.task.basis.data.TaskData;
+import com.task.basis.data.TaskDataList;
+import com.task.basis.model.Datum;
 import com.task.basis.model.TaskModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 
 import rx.Observable;
+import rx.functions.Func1;
 
 public class BasisApi {
 
   private final BasisTaskService basisTaskService;
+  TaskData taskData;
 
   //Constructor injection, BasisTaskService object dependency is injected with the inject annotation
   //The same basisTaskService object can be used without creating the new Instance every time
@@ -17,8 +24,28 @@ public class BasisApi {
     this.basisTaskService = basisTaskService;
   }
 
-  //With RxJavaAdapter
-  public Observable<TaskModel> getJsonData() {
-    return basisTaskService.getJsonData();
+  //From the serializable observable stream its mapped to TaskData which is Parcelable class.
+  //Returning parcelable TaskData object to the presenter
+
+
+  public Observable<TaskData> getJsonData() {
+    return basisTaskService.getJsonData().map(taskModel -> {
+
+      if (taskModel != null) {
+        if (taskModel.getData() != null) {
+          taskData = new TaskData();
+          List<TaskDataList> taskDataLists = new ArrayList<>();
+          for (Datum datum : taskModel.getData()) {
+            TaskDataList list = new TaskDataList();
+            list.setId(datum.getId());
+            list.setText(datum.getText());
+            taskDataLists.add(list);
+          }
+
+          taskData.setTaskDataList(taskDataLists);
+        }
+      }
+      return taskData;
+    });
   }
 }

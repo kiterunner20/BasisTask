@@ -4,6 +4,7 @@ import com.task.basis.api.BasisApi;
 import com.task.basis.core.BasePresenter;
 import com.task.basis.core.ErrorAction;
 
+import java.util.ArrayList;
 import javax.inject.Inject;
 
 import rx.Subscription;
@@ -30,10 +31,10 @@ public class BasisSwipePresenter extends BasePresenter<BasisSwipeView> {
         Subscription disposible = basisApi.getJsonData()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(dataModel -> {
+                .subscribe(taskData -> {
                             showContent();
-                            if (dataModel != null) {
-                                view.setJsonData(dataModel);
+                            if (taskData != null) {
+                                view.setJsonData((ArrayList)taskData.getTaskDataList());
                             } else {
                                 view.showEmpty("No data found");
                             }
